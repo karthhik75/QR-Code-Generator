@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file, if you have one -->
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <form id="qr-form">
+            <label for="data">Enter URL or Data:</label>
+            <input type="text" id="data" name="data" required>
+            <button type="submit">Generate QR Code</button>
+        </form>
+        <div id="qr-code-result" style="display: none;">
+            <h2>Your QR Code:</h2>
+            <img id="qr-code" src="" alt="QR Code">
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('qr-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const data = document.getElementById('data').value;
+
+            // Make a request to your server-side code here
+            // For demonstration, we are just simulating with a static image
+            const qrCodeImg = document.getElementById('qr-code');
+            qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(data)}`;
+            document.getElementById('qr-code-result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
