@@ -36,16 +36,35 @@
             font-size: 16px;
             cursor: pointer;
         }
+        #qrCode {
+            margin-top: 20px;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>QR Code Generator</h1>
-        <form action="generate_qr_code.py" method="post">
-            <input type="text" name="data" placeholder="Enter data or URL" required>
-            <br>
-            <button type="submit">Generate QR Code</button>
-        </form>
+        <input type="text" id="data" placeholder="Enter data or URL">
+        <br>
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <canvas id="qrCode"></canvas>
     </div>
+
+    <script>
+        function generateQRCode() {
+            const data = document.getElementById("data").value;
+            const qrCodeCanvas = document.getElementById("qrCode");
+
+            if (data) {
+                QRCode.toCanvas(qrCodeCanvas, data, function (error) {
+                    if (error) console.error(error);
+                    console.log("QR Code generated!");
+                });
+            } else {
+                alert("Please enter data or a URL to generate a QR code.");
+            }
+        }
+    </script>
 </body>
 </html>
